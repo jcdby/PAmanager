@@ -8,6 +8,7 @@ package services;
 import beans.ClientFacade;
 import beans.SPCatalogWrap;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -19,6 +20,7 @@ import javax.ws.rs.core.MediaType;
  */
 
 @Path("pamanager")
+@Stateless
 public class PamanagerWS {
     
     
