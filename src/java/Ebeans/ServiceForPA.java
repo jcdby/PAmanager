@@ -32,6 +32,17 @@ public class ServiceForPA implements Serializable {
     private Long id;
     
     @Column
+    private Long sid;
+
+    public Long getSid() {
+        return sid;
+    }
+
+    public void setSid(Long sid) {
+        this.sid = sid;
+    }
+    
+    @Column
     private String name;
     @Column
     private String redirectionAddress;
