@@ -5,10 +5,12 @@
  */
 package Ebeans;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -16,6 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ServiceForPAFacade extends AbstractFacade<ServiceForPA> {
+
     @PersistenceContext(unitName = "PAmanagerPU")
     private EntityManager em;
 
@@ -33,6 +36,21 @@ public class ServiceForPAFacade extends AbstractFacade<ServiceForPA> {
         return super.findAll(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public List<ServiceForPA> findAllServices() {
+        return this.findAll();
+    }
+
+    public List<ServiceForPA> findAllServices(Long sid) {
+        //QUERY is handcoded(Bad choice).
+        List<ServiceForPA> list = new ArrayList<ServiceForPA>();
+        for (ServiceForPA item: this.findAllServices()) {
+            if(item.getSid().equals(sid)){
+                list.add(item);
+            }
+        }
+        return list;
+    }
+
     @Override
     public int count() {
         return super.count(); //To change body of generated methods, choose Tools | Templates.
@@ -47,14 +65,11 @@ public class ServiceForPAFacade extends AbstractFacade<ServiceForPA> {
     public void edit(ServiceForPA entity) {
         super.edit(entity); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
+
     @Override
     public ServiceForPA find(Object id) {
         return super.find(id); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
     @Override
     public void remove(ServiceForPA entity) {
@@ -65,9 +80,5 @@ public class ServiceForPAFacade extends AbstractFacade<ServiceForPA> {
     public void create(ServiceForPA entity) {
         super.create(entity); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
-    
-    
+
 }

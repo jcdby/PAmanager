@@ -29,7 +29,11 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(services.PamanagerReservation.class);
         resources.add(services.PamanagerWS.class);
+        resources.add(services.service.ServiceProviderREST.class);
+        resources.add(services.service.ServiceREST.class);
+        resources.add(services.service.ServiceTypeREST.class);
     }
     
 }

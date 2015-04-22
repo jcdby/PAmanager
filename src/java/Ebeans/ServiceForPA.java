@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,19 +26,29 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "SERVICE")
 
+@XmlRootElement
 public class ServiceForPA implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
+    @Column
+    private Long sid;
+
     @Column
     private String name;
+
+    //Service URI is used for fetching designated service.
+    //For example, ReservationManager uses this to find target sites
+    //to get reservation.
+    //Please use pattern such as %s(String), %l(long), %d(decimal)
     @Column
-    private String redirectionAddress;
+    private String uri;
     @Column
     private String serviceIntroduction;
-    
+
     @Column
     private Long ownerid;
 
@@ -49,6 +60,14 @@ public class ServiceForPA implements Serializable {
         this.ownerid = ownerid;
     }
 
+    public Long getSid() {
+        return sid;
+    }
+
+    public void setSid(Long sid) {
+        this.sid = sid;
+    }
+
     public String getName() {
         return name;
     }
@@ -57,12 +76,12 @@ public class ServiceForPA implements Serializable {
         this.name = name;
     }
 
-    public String getRedirectionAddress() {
-        return redirectionAddress;
+    public String getUri() {
+        return uri;
     }
 
-    public void setRedirectionAddress(String redirectionAddress) {
-        this.redirectionAddress = redirectionAddress;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     public String getServiceIntroduction() {
@@ -72,9 +91,7 @@ public class ServiceForPA implements Serializable {
     public void setServiceIntroduction(String serviceIntroduction) {
         this.serviceIntroduction = serviceIntroduction;
     }
-    
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -107,5 +124,5 @@ public class ServiceForPA implements Serializable {
     public String toString() {
         return "Ebeans.ServiceForPA[ id=" + id + " ]";
     }
-    
+
 }

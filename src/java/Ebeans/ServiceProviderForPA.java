@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -19,14 +20,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "SERVICE_PROVIDER")
+@XmlRootElement
 public class ServiceProviderForPA implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column
+    @Column(name="name")
     private String SpName;
+    
+    @Column(name="uri")
+    private String uri;
    
     public String getSpName() {
         return SpName;
@@ -35,13 +40,21 @@ public class ServiceProviderForPA implements Serializable {
     public void setSpName(String SpName) {
         this.SpName = SpName;
     }
-
+    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     @Override
