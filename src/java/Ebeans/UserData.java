@@ -27,24 +27,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "UserData.findAll", query = "SELECT u FROM UserData u"),
     @NamedQuery(name = "UserData.findById", query = "SELECT u FROM UserData u WHERE u.id = :id"),
-    @NamedQuery(name = "UserData.findByName", query = "SELECT u FROM UserData u WHERE u.name = :name"),
-    @NamedQuery(name = "UserData.findByPwd", query = "SELECT u FROM UserData u WHERE u.pwd = :pwd")})
+    @NamedQuery(name = "UserData.findByPwd", query = "SELECT u FROM UserData u WHERE u.pwd = :pwd"),
+    @NamedQuery(name = "UserData.findByName", query = "SELECT u FROM UserData u WHERE u.name = :name")})
 public class UserData implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 1)
+    @Size(min = 1, max = 20)
     @Column(name = "ID")
     private String id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "NAME")
-    private Character name;
+    @Size(min = 1, max = 20)
+    @Column(name = "PWD")
+    private String pwd;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "PWD")
-    private Character pwd;
+    @Size(min = 1, max = 40)
+    @Column(name = "NAME")
+    private String name;
 
     public UserData() {
     }
@@ -53,10 +55,10 @@ public class UserData implements Serializable {
         this.id = id;
     }
 
-    public UserData(String id, Character name, Character pwd) {
+    public UserData(String id, String pwd, String name) {
         this.id = id;
-        this.name = name;
         this.pwd = pwd;
+        this.name = name;
     }
 
     public String getId() {
@@ -67,20 +69,20 @@ public class UserData implements Serializable {
         this.id = id;
     }
 
-    public Character getName() {
-        return name;
-    }
-
-    public void setName(Character name) {
-        this.name = name;
-    }
-
-    public Character getPwd() {
+    public String getPwd() {
         return pwd;
     }
 
-    public void setPwd(Character pwd) {
+    public void setPwd(String pwd) {
         this.pwd = pwd;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
