@@ -26,17 +26,14 @@ public class UserAuthenticationManager {
      * Find ID in database and compare password
      * return true or false
      */
-    public String userLogin(String id, String pwd) {
+    public boolean userLogin(String id, String pwd) {
         try {
             userData = new UserData();
             userData =  userDataFacade.find(id);
             if(!checkUserAlreadyExists(id)) {
-                return "null " + id + " " + pwd;
+                return false;
             }
-            System.out.println(id +" " + pwd);
-            System.out.println(userData.getId() + " " + userData.getPwd());
-            
-            return userData.getPwd().equals(pwd) + "";
+            return userData.getPwd().equals(pwd);
         } finally {
         }
     }
@@ -44,14 +41,14 @@ public class UserAuthenticationManager {
     /* userRegister
      * Create user data in database
      */
-    public String userRegister(String id, String name, String pwd) {
+    public boolean userRegister(String id, String name, String pwd) {
         try {
             if(checkUserAlreadyExists(id))
-                return "user already exists!";
+                return false;
             
-            userData = new UserData(id, name, pwd);
+            userData = new UserData(id, pwd, name);
             userDataFacade.create(userData);
-            return "create done!";
+            return true;
         } finally {
         }        
     }
@@ -59,12 +56,15 @@ public class UserAuthenticationManager {
     /* userUnregister
      * Remove user data from database
      */
-    public boolean userUnregister(String id) {
+    public boolean userUnregister(String id, String pwd) {
         try {
             userData = new UserData();
             userData = userDataFacade.find(id);
-            userDataFacade.remove(userData);
-            return true;
+            if(checkUserAlreadyExists(id) && userData.getPwd().equals(pwd)) {
+                userDataFacade.remove(userData);
+                return true;
+            }
+            return false;
         } finally {
         }
     }

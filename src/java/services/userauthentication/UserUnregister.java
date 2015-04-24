@@ -5,7 +5,14 @@
  */
 package services.userauthentication;
 
+import beans.UserAuthenticationManager;
+import javax.ejb.EJB;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -13,5 +20,13 @@ import javax.ws.rs.Path;
  */
 @Path("/unregister")
 public class UserUnregister {
+    @EJB
+    UserAuthenticationManager manager;
     
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_PLAIN)
+    public boolean registerTest(@FormParam("id") String id, @FormParam("pwd") String pwd) {
+        return manager.userUnregister(id, pwd);
+    }
 }

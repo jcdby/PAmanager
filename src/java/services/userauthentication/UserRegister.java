@@ -25,9 +25,8 @@ public class UserRegister {
     
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.TEXT_HTML)
-    public String registerTest(@FormParam("id") String id, @FormParam("name") String name, @FormParam("pwd") String pwd) {
-        String result = manager.userRegister(id, name, pwd);
-        return "<h3>" + result + "</h3>";
+    @Produces(MediaType.TEXT_PLAIN)
+    public boolean registerTest(@FormParam("id") String id, @FormParam("name") String name, @FormParam("pwd") String pwd) {
+        return manager.userRegister(id, name, pwd);
     }
 }

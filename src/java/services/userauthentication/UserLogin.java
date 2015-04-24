@@ -25,17 +25,10 @@ public class UserLogin {
     @EJB
     UserAuthenticationManager manager;
     
-    @GET
-    @Produces("text/html")
-    public String loginServiceGetTest() {
-        return "<h3>test successful</h3>";
-    }
-    
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.TEXT_HTML)
-    public String loginServicePostTest(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-        
-        return "<h3>test id=" + id + " pwd=" + pwd + ": " + manager.userLogin(id, pwd) + " " + "</h3>";
+    @Produces(MediaType.TEXT_PLAIN)
+    public boolean loginTest(@FormParam("id") String id, @FormParam("pwd") String pwd) {
+        return manager.userLogin(id, pwd);
     }
 }
