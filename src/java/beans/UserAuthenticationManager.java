@@ -30,7 +30,7 @@ public class UserAuthenticationManager {
         try {
             userData = new UserData();
             userData =  userDataFacade.find(id);
-            if(!checkUserAlreadyExists(id)) {
+            if(!userAlreadyExists(id)) {
                 return false;
             }
             return userData.getPwd().equals(pwd);
@@ -41,13 +41,19 @@ public class UserAuthenticationManager {
     /* userRegister
      * Create user data in database
      */
-    public boolean userRegister(String id, String name, String pwd) {
+    public boolean userRegister(UserData u) {
         try {
-            if(checkUserAlreadyExists(id))
+            if(userAlreadyExists(u.getId()))
                 return false;
             
-            userData = new UserData(id, pwd, name);
+            userData = new UserData();
+            userData.setId(u.getId());
+            userData.setName(u.getName());
+            userData.setPwd(u.getPwd());
+                                    
             userDataFacade.create(userData);
+            
+            System.out.println(userData.getId() + userData.getPwd() + userData.getName());
             return true;
         } finally {
         }        
@@ -60,7 +66,7 @@ public class UserAuthenticationManager {
         try {
             userData = new UserData();
             userData = userDataFacade.find(id);
-            if(checkUserAlreadyExists(id) && userData.getPwd().equals(pwd)) {
+            if(userAlreadyExists(id) && userData.getPwd().equals(pwd)) {
                 userDataFacade.remove(userData);
                 return true;
             }
@@ -69,7 +75,7 @@ public class UserAuthenticationManager {
         }
     }
     
-    private boolean checkUserAlreadyExists(String id) {
+    private boolean userAlreadyExists(String id) {
         return userDataFacade.find(id)!=null;
     }
 }
