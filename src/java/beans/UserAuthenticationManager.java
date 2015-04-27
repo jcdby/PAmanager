@@ -21,6 +21,7 @@ public class UserAuthenticationManager {
     UserDataFacade userDataFacade;
   
     UserData userData;
+    UserData userDataFound;
     
     /* userLogin
      * Find ID in database and compare password
@@ -29,11 +30,17 @@ public class UserAuthenticationManager {
     public boolean userLogin(UserData u) {
         try {
             userData = new UserData();
-            userData =  userDataFacade.find(u.getId());
+            userData.setId(u.getId());
+            userData.setName(u.getName());
+            userData.setPwd(u.getPwd());
+            
+            userDataFound = new UserData();
+            userDataFound =  userDataFacade.find(u.getId());
+            
             if(!userAlreadyExists(userData.getId())) {
                 return false;
             }
-            return userData.getPwd().equals(u.getPwd());
+            return userData.getPwd().equals(userDataFound.getPwd());
         } finally {
         }
     }
@@ -64,12 +71,16 @@ public class UserAuthenticationManager {
      */
     public boolean userUnregister(UserData u) {
         try {
+            userData = new UserData();
+            userData.setId(u.getId());
+            userData.setName(u.getName());
+            userData.setPwd(u.getPwd());
             
-            userData = new UserData();           
+            userDataFound = new UserData();
             
-            userData = userDataFacade.find(u.getId());
-            if(userAlreadyExists(userData.getId()) && userData.getPwd().equals(u.getPwd())) {
-                userDataFacade.remove(userData);
+            userDataFound = userDataFacade.find(userData.getId());
+            if(userAlreadyExists(userData.getId()) && userData.getPwd().equals(userDataFound.getPwd())) {
+                userDataFacade.remove(userDataFound);
                 return true;
             }
             return false;
