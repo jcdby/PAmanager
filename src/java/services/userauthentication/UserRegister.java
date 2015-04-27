@@ -24,6 +24,7 @@ public class UserRegister {
     @EJB
     UserAuthenticationManager manager;
     
+    // This is for test: loginTest.html
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
@@ -31,7 +32,7 @@ public class UserRegister {
         UserData userData = new UserData(id, pwd, name);
         return manager.userRegister(userData);
     }
-    
+    //This is for android communication
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public boolean registerFromJSON(UserData userData) {

@@ -26,14 +26,14 @@ public class UserAuthenticationManager {
      * Find ID in database and compare password
      * return true or false
      */
-    public boolean userLogin(String id, String pwd) {
+    public boolean userLogin(UserData u) {
         try {
             userData = new UserData();
-            userData =  userDataFacade.find(id);
-            if(!userAlreadyExists(id)) {
+            userData =  userDataFacade.find(u.getId());
+            if(!userAlreadyExists(userData.getId())) {
                 return false;
             }
-            return userData.getPwd().equals(pwd);
+            return userData.getPwd().equals(u.getPwd());
         } finally {
         }
     }
@@ -62,11 +62,13 @@ public class UserAuthenticationManager {
     /* userUnregister
      * Remove user data from database
      */
-    public boolean userUnregister(String id, String pwd) {
+    public boolean userUnregister(UserData u) {
         try {
-            userData = new UserData();
-            userData = userDataFacade.find(id);
-            if(userAlreadyExists(id) && userData.getPwd().equals(pwd)) {
+            
+            userData = new UserData();           
+            
+            userData = userDataFacade.find(u.getId());
+            if(userAlreadyExists(userData.getId()) && userData.getPwd().equals(u.getPwd())) {
                 userDataFacade.remove(userData);
                 return true;
             }

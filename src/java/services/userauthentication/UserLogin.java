@@ -5,6 +5,7 @@
  */
 package services.userauthentication;
 
+import Ebeans.UserData;
 import beans.UserAuthenticationManager;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -29,6 +30,15 @@ public class UserLogin {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
     public boolean loginTest(@FormParam("id") String id, @FormParam("pwd") String pwd) {
-        return manager.userLogin(id, pwd);
+        UserData userData = new UserData(id, pwd, "");
+        return manager.userLogin(userData);
+    }
+    
+    //This is for android communication
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public boolean registerFromJSON(UserData userData) {
+        System.out.println("register from json called");
+        return manager.userLogin(userData);
     }
 }
