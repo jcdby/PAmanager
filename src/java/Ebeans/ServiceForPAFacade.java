@@ -49,7 +49,6 @@ public class ServiceForPAFacade extends AbstractFacade<ServiceForPA> {
     }
     
     
-    
     @Override
     public ServiceForPA find(Object id) {
         return super.find(id); //To change body of generated methods, choose Tools | Templates.

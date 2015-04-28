@@ -5,6 +5,8 @@
  */
 package beans;
 
+import Ebeans.Reservation;
+import Ebeans.ReservationFacade;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -31,6 +33,9 @@ public class ClientFacade {
     
     @EJB
     ServiceProviderForPAFacade spManager;
+    
+    @EJB
+    private ReservationFacade reservationFacade;
     
    
     //Produce Service Provider catalog wrap class to exchange between EJB server and Android client.
@@ -62,6 +67,11 @@ public class ClientFacade {
         List<ServiceProviderForPA> splist = new ArrayList<ServiceProviderForPA>();
         splist  =  spManager.findAll();
         return splist;
+    }
+    
+    public List<Reservation> getReservations(long uid)
+    {
+        return reservationFacade.getReservations(uid);
     }
     
 }

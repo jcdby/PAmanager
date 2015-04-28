@@ -37,7 +37,7 @@ public class ServiceForPA implements Serializable {
     private String redirectionAddress;
     @Column
     private String serviceIntroduction;
-    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
     @Column
     private Long ownerid;
 

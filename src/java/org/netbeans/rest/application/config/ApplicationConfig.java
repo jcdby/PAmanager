@@ -30,6 +30,11 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(services.PamanagerWS.class);
+        resources.add(services.UserLogin.class);
+        resources.add(services.service.ServiceProviderREST.class);
+        resources.add(services.service.ServiceREST.class);
+        resources.add(services.userauthentication.UserRegister.class);
+        resources.add(services.userauthentication.UserUnregister.class);
     }
     
 }
