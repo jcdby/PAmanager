@@ -74,4 +74,11 @@ public class ClientFacade {
         return reservationFacade.getReservations(uid);
     }
     
+    public void setServiceProvider(String SPname, String uri)
+    {
+        ServiceProviderForPA serProvider = new ServiceProviderForPA();// serProvider is an entity. Here is not sure if it will work well.let`s see.
+        serProvider.setSpName(SPname);
+        serProvider.setUri(uri);        
+        spManager.create(serProvider);
+    }
 }

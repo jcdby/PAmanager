@@ -62,6 +62,8 @@ public class ServiceProviderForPAFacade extends AbstractFacade<ServiceProviderFo
         super.create(entity); //To change body of generated methods, choose Tools | Templates.
     }
     
+    
+    
     public ArrayList<String> getAllSpNames()
     {
         ArrayList<ServiceProviderForPA> sps = (ArrayList<ServiceProviderForPA>) findAll();

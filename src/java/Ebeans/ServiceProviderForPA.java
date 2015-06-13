@@ -20,14 +20,25 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "SERVICE_PROVIDER")
 public class ServiceProviderForPA implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column
     private String SpName;
-   
+    @Column
+    private String uri;
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
     public String getSpName() {
         return SpName;
     }
@@ -68,5 +79,5 @@ public class ServiceProviderForPA implements Serializable {
     public String toString() {
         return "Ebeans.ServiceProviderForPA[ id=" + id + " ]";
     }
-    
+
 }

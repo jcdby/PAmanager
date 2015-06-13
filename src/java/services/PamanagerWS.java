@@ -11,7 +11,9 @@ import beans.SPCatalogWrap;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -45,6 +47,19 @@ public class PamanagerWS {
     public List<Reservation> getReservations(@PathParam("uid") long uid){
         return clientFacade.getReservations(uid);
     }
+    
+    
+    @GET
+    @Path("RegisterServiceProvider/{SPname}/{URI}")
+    public String RegisterSP(@PathParam("SPname") String SPname, @PathParam("URI") String uri)//SPname is the name of service provider, and the uri
+            //is used to retrieve the services provided by the related service provider.
+    {
+              
+        clientFacade.setServiceProvider(SPname, uri);
+        return "OK";
+    }
+    
+    
     
     
     
