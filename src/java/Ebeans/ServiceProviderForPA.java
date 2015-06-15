@@ -28,16 +28,7 @@ public class ServiceProviderForPA implements Serializable {
 
     @Column
     private String SpName;
-    @Column
-    private String uri;
-
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
+    
 
     public String getSpName() {
         return SpName;

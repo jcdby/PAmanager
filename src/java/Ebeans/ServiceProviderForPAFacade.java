@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -17,6 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ServiceProviderForPAFacade extends AbstractFacade<ServiceProviderForPA> {
+
     @PersistenceContext(unitName = "PAmanagerPU")
     private EntityManager em;
 
@@ -44,8 +46,32 @@ public class ServiceProviderForPAFacade extends AbstractFacade<ServiceProviderFo
     public void edit(ServiceProviderForPA entity) {
         super.edit(entity); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ServiceProviderForPA findByName(String name) {
+        for (ServiceProviderForPA sp : findAll()) {
+            if(sp.getSpName().endsWith(name)){
+                return sp;
+            }
+        }
+        return null;
+    }
+
+    public Long findIdByName(String name) {
+        return findByName(name).getId();
+    }
+
+    public Boolean isServiceProvider(String name) {
+        if (findByName(name) != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public ServiceProviderForPA find(Object id) {
@@ -61,29 +87,20 @@ public class ServiceProviderForPAFacade extends AbstractFacade<ServiceProviderFo
     public void create(ServiceProviderForPA entity) {
         super.create(entity); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
-    public ArrayList<String> getAllSpNames()
-    {
+
+    public ArrayList<String> getAllSpNames() {
         ArrayList<ServiceProviderForPA> sps = (ArrayList<ServiceProviderForPA>) findAll();
         ArrayList<String> names = new ArrayList<String>();
-        for(ServiceProviderForPA p: sps)
-        {
+        for (ServiceProviderForPA p : sps) {
             names.add(p.getSpName());
         }
-        
+
         return names;
-        
+
     }
-    
-    
-    
-    
-    
 
     public ServiceProviderForPAFacade() {
         super(ServiceProviderForPA.class);
     }
-    
+
 }

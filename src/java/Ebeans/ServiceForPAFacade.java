@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ServiceForPAFacade extends AbstractFacade<ServiceForPA> {
+
     @PersistenceContext(unitName = "PAmanagerPU")
     private EntityManager em;
 
@@ -47,13 +48,11 @@ public class ServiceForPAFacade extends AbstractFacade<ServiceForPA> {
     public void edit(ServiceForPA entity) {
         super.edit(entity); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
     @Override
     public ServiceForPA find(Object id) {
         return super.find(id); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
     @Override
     public void remove(ServiceForPA entity) {
@@ -64,9 +63,28 @@ public class ServiceForPAFacade extends AbstractFacade<ServiceForPA> {
     public void create(ServiceForPA entity) {
         super.create(entity); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
-    
-    
+
+    public ServiceForPA findByName(String name) {
+        for (ServiceForPA service : findAll()) {
+            if (service.getName().endsWith(name)) {
+                return service;
+            }
+        }
+        return null;
+    }
+
+    public Long findIdByName(String name) {
+        return findByName(name).getId();
+    }
+
+    public Boolean isService(String name, Long id) {
+        ServiceForPA service = findByName(name);
+        if (service != null) {
+            if (service.getOwnerid().equals(id)) {
+                return true;
+            }
+        
+        }
+          return false;
+    }
 }

@@ -6,8 +6,11 @@
 package services;
 
 import Ebeans.Reservation;
+import Ebeans.ServiceForPA;
+import Ebeans.ServiceProviderForPA;
 import beans.ClientFacade;
 import beans.SPCatalogWrap;
+import com.google.gson.Gson;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -50,14 +53,24 @@ public class PamanagerWS {
     
     
     @GET
-    @Path("RegisterServiceProvider/{SPname}/{URI}")
-    public String RegisterSP(@PathParam("SPname") String SPname, @PathParam("URI") String uri)//SPname is the name of service provider, and the uri
+    @Path("RegisterServiceProvider/{SPname}/{ServiceName}/{RedirectionAddress}")
+    public String RegisterSP(
+            @PathParam("SPname") String SPname, 
+            @PathParam("ServiceName") String servicename,
+            @PathParam("RedirectionAddress") String redirectionaddress/*,
+            @PathParam("ReservationUri") String reservationuri*/)//SPname is the name of service provider, and the uri
             //is used to retrieve the services provided by the related service provider.
     {
-              
-        clientFacade.setServiceProvider(SPname, uri);
-        return "OK";
+        
+        //Register the Service Provider and its services.
+         clientFacade.setServiceProvider(SPname, servicename, redirectionaddress);
+         
+         return "OK";
     }
+    
+    
+    
+    
     
     
     

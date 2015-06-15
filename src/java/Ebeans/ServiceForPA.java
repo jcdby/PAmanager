@@ -26,20 +26,27 @@ import javax.persistence.Table;
 @Table(name = "SERVICE")
 
 public class ServiceForPA implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column
     private String name;
     @Column
     private String redirectionAddress;
-    @Column
-    private String serviceIntroduction;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
     @Column
     private Long ownerid;
+
+    public ServiceForPA(String name, String redirectionAddress, Long ownerid) {
+        this.name = name;
+        this.redirectionAddress = redirectionAddress;
+        this.ownerid = ownerid;
+    }
+
+    public ServiceForPA(){}
 
     public Long getOwnerid() {
         return ownerid;
@@ -65,16 +72,6 @@ public class ServiceForPA implements Serializable {
         this.redirectionAddress = redirectionAddress;
     }
 
-    public String getServiceIntroduction() {
-        return serviceIntroduction;
-    }
-
-    public void setServiceIntroduction(String serviceIntroduction) {
-        this.serviceIntroduction = serviceIntroduction;
-    }
-    
-    
-    
     public Long getId() {
         return id;
     }
@@ -107,5 +104,5 @@ public class ServiceForPA implements Serializable {
     public String toString() {
         return "Ebeans.ServiceForPA[ id=" + id + " ]";
     }
-    
+
 }
